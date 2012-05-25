@@ -23,6 +23,6 @@
 
 <br />
 
-<% admin = Client.where(["email = ?", 'admin@quantumtecnologia']).first %>
+<% admin = Client.where(["email = ?", 'admin@quantumtecnologia.com']).first %>
 <%= link_to 'New Category', new_category_path %> | 
 <%= link_to 'Back', client_path(admin) %>

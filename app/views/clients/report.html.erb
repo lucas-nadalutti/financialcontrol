@@ -2,32 +2,24 @@
 
 <% transactions = transactions_report %>
 
-<table>
+<table border="3">
   <tr>
     <th>Value</th>
-    <th></th>
     <th>Occurred at</th>
-    <th></th>
     <th>Type</th>
-    <th></th>
     <th>Category</th>
-    <th></th>
   </tr>
 
 <% transactions.each do |transaction| %>
 	<tr>
 		<td>$<%= transaction.value %></td>
-		<td></td>
 		<td><%= transaction.datetime %></td>
-		<td></td>
 		<td><% if transaction.credit %>
 					CREDIT
 				<% else %>
 					DEBIT
 				<% end %></td>
-		<td></td>
 		<td><%= transaction.category.name %></td>
-		<td></td>
 		<td><%= link_to 'Show', transaction %></td>
 		<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
 	</tr>

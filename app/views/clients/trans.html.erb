@@ -2,34 +2,26 @@
 
 <% specifics = table_arranging %>
 
-<table>
+<table border="3">
 <% if !specifics %>
 
   <tr>
     <th>Value</th>
-    <th></th>
     <th>Occurred at</th>
-    <th></th>
     <th>Type</th>
-    <th></th>
 	  <th>Category</th>
-	  <th></th>
   </tr>
 
 	<% @client.transactions.each do |transaction| %>
 		<tr>
 			<td>$<%= transaction.value %></td>
-			<td></td>
 			<td><%= transaction.datetime %></td>
-			<td></td>
 			<td><% if transaction.credit %>
 						CREDIT
 					<% else %>
 						DEBIT
 					<% end %></td>
-			<td></td>
 			<td><%= transaction.category.name %></td>
-			<td></td>
 			<td><%= link_to 'Show', transaction %></td>
 			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
 		</tr>
@@ -45,21 +37,22 @@
 		<br>
 			<td><b>Category:</b> <%= transaction.category.name %></td>
 		</br></br>
-		<table>
+		<table border="3">
+			<tr>
+				<th>Value</th>
+				<th>Occurred at</th>
+				<th>Type</th>
+			</tr>
 		<% end %>
 		<% previous = transaction %>
 		<tr>
-			<td><b>Value:</b> $<%= transaction.value %></td>
-			<td></td>
-			<td><b> | Occurred at:</b> <%= transaction.datetime %></td>
-			<td></td>
-			<td><b> | Type:</b> 
-					<% if transaction.credit %>
+			<td>$<%= transaction.value %></td>
+			<td><%= transaction.datetime %></td>
+			<td><% if transaction.credit %>
 						CREDIT
 					<% else %>
 						DEBIT
 					<% end %></td>
-			<td></td>
 			<td><%= link_to 'Show', transaction %></td>
 			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
 		</tr>
