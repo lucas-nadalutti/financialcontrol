@@ -13,9 +13,6 @@
 			<td>Password:</td>
 			<td><input type='password' name='in_client[password]'/></td>
 		</tr>
-		<td>
-			<input type='submit' value='Log In'/>
-		</td>
 	<table>
 	</br>
 	<input type='submit' value='Log In'/>
