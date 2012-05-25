@@ -71,7 +71,7 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
 		@client.logged = false
     if @client.save
-      redirect_to signup_path, notice: 'Client was successfully created!'
+      redirect_to signup_clients_path, notice: 'Client was successfully created!'
     else
       render action: "new"
     end
@@ -148,6 +148,8 @@ class ClientsController < ApplicationController
 		@client = Client.find(params[:id])
 		if !@client.logged
 			redirect_to @client, notice: 'Not logged in!'
+		elsif @client.transactions.empty?
+			notice: 'You don\'t have registered transactions!'
 		end
 	end
 

@@ -31,7 +31,6 @@
 			<td><%= transaction.category.name %></td>
 			<td></td>
 			<td><%= link_to 'Show', transaction %></td>
-			<td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
 			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
 		</tr>
 	<% end %>
@@ -62,7 +61,6 @@
 					<% end %></td>
 			<td></td>
 			<td><%= link_to 'Show', transaction %></td>
-			<td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
 			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
 		</tr>
 	<% end %>
@@ -70,6 +68,10 @@
 <% end %>
 </table>
 </br>
+
+<% if @client.transactions.empty? %>
+	<h4>You don't have registered transactions!</h4>
+<% end %>
 
 <%= link_to "See all transactions", trans_client_path %>
 </br></br>
