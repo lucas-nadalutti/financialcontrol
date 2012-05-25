@@ -1,0 +1,15 @@
+class Transaction < ActiveRecord::Base
+  attr_accessible :credit, :datetime, :value, :obs, :client_id, :category_id, :payment_method_id
+
+	validates_presence_of :client_id, :message => "must be given!"
+	validates_presence_of :category_id, :message => "must be given!"
+	validates_associated :client
+	validates_numericality_of :value,
+														:greater_than => 0,
+														:message => "must be positive!"
+	
+	belongs_to :category
+	belongs_to :payment_method
+	belongs_to :client
+	
+end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<form action='report'>
+	<b>Category: </b>
+	<select name='category_name'>
+		<% for c in Category.all %>
+			<option value= <%= c.name.tr(" ", "*") %>> <%= c.name %> </option>
+		<% end %>
+	</select>
+	<input type='submit' value='Generate'/>
+</form>
+
+</br>
+<%= link_to 'Back', trans_client_path %>

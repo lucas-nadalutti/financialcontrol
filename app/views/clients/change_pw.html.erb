@@ -1,0 +1,31 @@
+<h1>Changing Password</h1>
+
+<form action='change'>
+
+	<% if @client.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@client.errors.count, "error") %> prohibited this password from being updated:</h2>
+
+		  <ul>
+		  <% @client.errors.full_messages.each do |msg| %>
+		    <li><%= msg %></li>
+		  <% end %>
+		  </ul>
+		</div>
+	<% end %>
+
+	<b>Old Password:</b></br>
+	<input type='password' name='pw[old]'/></br>
+
+  <b>New Password:</b></br>
+	<input type='password' name='pw[new]'/></br>
+
+  <b>Confirm new Password:</b></br>
+	<input type='password' name='pw[confirm]'/></br></br>
+
+	<input type='submit' value='Change Password'/>
+
+</form>
+
+</br>
+<%= link_to 'Back', @client %>

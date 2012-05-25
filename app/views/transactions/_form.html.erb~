@@ -1,0 +1,45 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+		<% if @transaction.client %>
+			<%= f.hidden_field 'client_id' %>
+		<% else %>
+			<p><%= f.label :client_id %><br />
+			<%= f.collection_select(:client_id,
+				Client.order('name'),
+				:id, :name, {:prompt => true}) %></p>
+		<% end %>
+  </div>
+  <div class="field">
+		<% if @transaction.category %>
+			<%= f.hidden_field 'category_id' %>
+		<% else %>
+			<p><%= f.label :category_id %><br />
+			<%= f.collection_select(:category_id,
+				Category.order('name'),
+				:id, :name, {:prompt => true}) %></p>
+		<% end %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :credit %><br />
+    <%= f.check_box :credit %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

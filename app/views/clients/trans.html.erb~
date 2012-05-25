@@ -1,0 +1,88 @@
+<p id="notice"><%= notice %></p>
+
+<% specifics = table_arranging %>
+
+<table>
+<% if !specifics %>
+
+  <tr>
+    <th>Value</th>
+    <th></th>
+    <th>Occurred at</th>
+    <th></th>
+    <th>Type</th>
+    <th></th>
+	  <th>Category</th>
+	  <th></th>
+  </tr>
+
+	<% @client.transactions.each do |transaction| %>
+		<tr>
+			<td>$<%= transaction.value %></td>
+			<td></td>
+			<td><%= transaction.datetime %></td>
+			<td></td>
+			<td><% if transaction.credit %>
+						CREDIT
+					<% else %>
+						DEBIT
+					<% end %></td>
+			<td></td>
+			<td><%= transaction.category.name %></td>
+			<td></td>
+			<td><%= link_to 'Show', transaction %></td>
+			<td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
+		</tr>
+	<% end %>
+
+<% else %>
+	<% transactions = specifics.order(:category_id).order(:datetime) %>
+	<% previous = nil %>
+
+	<% transactions.each do |transaction| %>
+		<% if !previous || (previous && (previous.category.name != transaction.category.name)) %>
+		</table>
+		<br>
+			<td><b>Category:</b> <%= transaction.category.name %></td>
+		</br></br>
+		<table>
+		<% end %>
+		<% previous = transaction %>
+		<tr>
+			<td><b>Value:</b> $<%= transaction.value %></td>
+			<td></td>
+			<td><b> | Occurred at:</b> <%= transaction.datetime %></td>
+			<td></td>
+			<td><b> | Type:</b> 
+					<% if transaction.credit %>
+						CREDIT
+					<% else %>
+						DEBIT
+					<% end %></td>
+			<td></td>
+			<td><%= link_to 'Show', transaction %></td>
+			<td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+			<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
+		</tr>
+	<% end %>
+
+<% end %>
+</table>
+</br>
+
+<%= link_to "See all transactions", trans_client_path %>
+</br></br>
+<%= link_to 'See transactions from a specific month', specific_t_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions in specific period', specific_period_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions with specific values range', specific_values_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions from a specific category', specific_category_client_path %>
+</br></br>
+<%= link_to "Add transaction", :controller => "transactions",
+																						:action => "new",
+																						:client => @client %>
+</br></br>
+<%= link_to 'Back', @client %>

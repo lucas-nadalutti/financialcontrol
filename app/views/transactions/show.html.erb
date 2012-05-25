@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value:</b>
+  <%= @transaction.value %>
+</p>
+
+<p>
+  <b>Occurred at:</b>
+  <%= @transaction.datetime %>
+</p>
+
+<p>
+  <b>Type:</b>
+	<% if @transaction.credit %>
+		CREDIT
+	<% else %>
+		DEBIT
+	<% end %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @transaction.category.name %>
+</p>
+
+<p>
+  <b>Observation:</b>
+  <%= @transaction.obs %>
+</p>
+
+<%= link_to 'Edit observation', edit_transaction_path %>
+
+</br></br>
+<%= link_to 'Back', @transaction.client %>

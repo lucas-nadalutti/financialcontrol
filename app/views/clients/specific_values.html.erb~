@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<form action='report'>
+	Minimum value: <input type='text' name='values[min]'/>
+	Maximum value: <input type='text' name='values[max]'/>
+	<input type='submit' value='Generate'/>
+</form>
+
+<%= link_to 'Back', report_client_path %>

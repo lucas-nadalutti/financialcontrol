@@ -1,0 +1,6 @@
+<h1>Add a description</h1>
+
+<form action='add_obs'>
+<TEXTAREA Name='obs' ROWS=20 COLS=50></TEXTAREA>
+<input type='submit' value='Insert OBS'/>
+</form>

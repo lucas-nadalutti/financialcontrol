@@ -1,0 +1,85 @@
+class TransactionsController < ApplicationController
+  # GET /transactions
+  # GET /transactions.json
+  def index
+    @transactions = Transaction.all
+  end
+
+  # GET /transactions/1
+  # GET /transactions/1.json
+  def show
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # GET /transactions/new
+  # GET /transactions/new.json
+  def new
+    @transaction = Transaction.new
+
+		if params[:client]
+			@transaction.client = Client.find(params[:client])
+		end
+		if params[:category]
+			@transaction.category = Category.find(params[:category])
+		end
+		if params[:payment_method]
+			@transaction.payment_method = PaymentMethod.find(params[:payment_method])
+		end
+  end
+
+  # GET /transactions/1/edit
+  def edit
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # POST /transactions
+  # POST /transactions.json
+  def create
+    @transaction = Transaction.new(params[:transaction])
+    if @transaction.save
+			@transaction.datetime = @transaction.created_at
+			@transaction.save
+      redirect_to trans_client_path(@transaction.client), notice: 'Transaction was successfully created!'
+    else
+      render action: "new"
+    end
+  end
+
+  # PUT /transactions/1
+  # PUT /transactions/1.json
+	# Transactions must never be updated!
+  def update
+    @transaction = Transaction.find(params[:id])
+    if @transaction.update_attributes(params[:transaction])
+      redirect_to @transaction, notice: 'Transaction was successfully updated!'
+    else
+      render action: "edit"
+    end
+  end
+
+  # DELETE /transactions/1
+  # DELETE /transactions/1.json
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.destroy
+    redirect_to trans_client_path(@transaction.client), notice: 'Transaction was successfully erased!'
+  end
+
+	def write_obs
+    @transaction = Transaction.find(params[:id])
+	end
+
+	def add_obs
+    @transaction = Transaction.find(params[:id])
+		obs = params['obs']
+		if obs != ''
+			@transaction.obs = params['obs']
+			@transaction.save
+			notice = 'Observation added successfully!'
+		else
+			notice = 'Nothing was written!'
+		end
+		redirect_to trans_client_path, notice: notice
+	end
+
+end

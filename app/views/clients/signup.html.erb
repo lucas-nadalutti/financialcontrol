@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Signing up</h1>
+
+<form action='/clients/signup/login'>
+	<table>
+		<tr>
+			<td>E-mail:</td>
+			<td><input type='text' name='in_client[email]'/></td>
+		</tr>
+		<tr>
+			</br>
+			<td>Password:</td>
+			<td><input type='password' name='in_client[password]'/></td>
+		</tr>
+	<table>
+	</br>
+	<input type='submit' value='Log In'/>
+</form>
+
+</br></br>
+<%= link_to 'Back', clients_path %>

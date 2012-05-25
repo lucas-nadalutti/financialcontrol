@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<% transactions = transactions_report %>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th></th>
+    <th>Occurred at</th>
+    <th></th>
+    <th>Type</th>
+    <th></th>
+    <th>Category</th>
+    <th></th>
+  </tr>
+
+<% transactions.each do |transaction| %>
+	<tr>
+		<td>$<%= transaction.value %></td>
+		<td></td>
+		<td><%= transaction.datetime %></td>
+		<td></td>
+		<td><% if transaction.credit %>
+					CREDIT
+				<% else %>
+					DEBIT
+				<% end %></td>
+		<td></td>
+		<td><%= transaction.category.name %></td>
+		<td></td>
+		<td><%= link_to 'Show', transaction %></td>
+		<td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
+	</tr>
+<% end %>
+
+</table>
+</br>
+
+<b>Total spent in these transactions:</b> $<%= transactions.sum(:value) %></br>
+<b>Average spent in these transactions:</b> <%= round_to_two_decimals(transactions.average(:value)) %></br>
+<% credit_count = (transactions.where(["credit = ?", true])).count(:credit) %>
+<% debit_count = (transactions.where(["credit = ?", false])).count(:credit) %>
+<b>Percentage of credit transactions:</b> <%= round_to_two_decimals(calculate_percentage(credit_count, debit_count)) %>%</br>
+<b>Percentage of debit transactions:</b> <%= round_to_two_decimals(calculate_percentage(debit_count, credit_count)) %>%</br>
+
+</br>
+
+<%= link_to "See all transactions", trans_client_path %>
+</br></br>
+<%= link_to 'See transactions from a specific month', specific_t_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions in specific period', specific_period_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions with specific values range', specific_values_client_path %>
+</br></br>
+<%= link_to 'Generate report for transactions from a specific category', specific_category_client_path %>
+</br></br>
+<%= link_to "Add transaction", :controller => "transactions",
+																						:action => "new",
+																						:client => @client %>
+</br></br>
+<%= link_to 'Back', @client %>

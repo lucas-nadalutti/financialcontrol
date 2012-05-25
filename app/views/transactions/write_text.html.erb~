@@ -1,0 +1,6 @@
+<h1>Add your text</h1>
+
+<form action='addtext'>
+<TEXTAREA Name="content" ROWS=20 COLS=50></TEXTAREA>
+<input type='submit' value='Log In'/>
+</form>

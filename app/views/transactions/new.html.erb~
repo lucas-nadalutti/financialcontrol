@@ -1,0 +1,9 @@
+<h1>New transaction</h1>
+
+<%= render 'form' %>
+
+<% if @transaction.client %>
+<%= link_to 'Back', trans_client_path %>
+<% else %>
+<%= link_to 'Back', categories_path %>
+<% end %>
